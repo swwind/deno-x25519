@@ -1,5 +1,5 @@
 import { assertEquals } from "@std/assert";
-import { genkey, pubkey, x25519 } from "./main.ts";
+import { genkey, pubkey, x25519 } from "./mod.ts";
 import { decodeBase64, encodeBase64 } from "@std/encoding";
 
 function checkKeyPair(sk: string, pk: string) {
@@ -29,10 +29,3 @@ Deno.test("x25519 test", () => {
 
   assertEquals(encodeBase64(s1), encodeBase64(s2));
 });
-
-console.log(
-  encodeBase64(x25519(
-    decodeBase64("AIPkgkzYjSF85jOgO1V6+bM49VCWrwoPcwlKiqyisWY="),
-    decodeBase64("fppOZbL71peOnZoV1l9/9OI28RcN60VJQiAh6JZvWEM="),
-  )),
-);
