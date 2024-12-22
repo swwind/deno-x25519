@@ -19,15 +19,15 @@ jobs:
           deno-version: v2.x
 
       - name: Install
-        run:
-          - rustup target add wasm32-unknown-unknown
-          - cargo install wasm-pack
-          - wasm-pack build --target deno
+        run: |
+          rustup target add wasm32-unknown-unknown
+          cargo install wasm-pack
+          wasm-pack build --target deno
 
       - name: Test
-        run:
-          - cargo test
-          - deno test -A
+        run: |
+          cargo test
+          deno test -A
 
       - name: Publish package
         run: deno publish
