@@ -1,0 +1,11 @@
+{
+  "name": "@swwind/x25519",
+  "version": "0.0.1",
+  "tasks": {
+    "build": "wasm-pack build --target deno"
+  },
+  "imports": {
+    "@std/assert": "jsr:@std/assert@1",
+    "@std/encoding": "jsr:@std/encoding@^1.0.6"
+  }
+}
