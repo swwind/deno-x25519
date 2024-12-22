@@ -1,0 +1,33 @@
+name: Publish
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+
+      - name: Install
+        run:
+          - rustup target add wasm32-unknown-unknown
+          - cargo install wasm-pack
+          - wasm-pack build --target deno
+
+      - name: Test
+        run:
+          - cargo test
+          - deno test -A
+
+      - name: Publish package
+        run: deno publish
