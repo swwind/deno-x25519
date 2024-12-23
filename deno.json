@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "license": "MIT",
   "tasks": {
-    "build": "wasm-pack build --target deno"
+    "build": "env RUSTFLAGS=\"-C target-feature=+simd128\" wasm-pack build --target deno"
   },
   "imports": {
     "@std/assert": "jsr:@std/assert@1",

@@ -13,10 +13,10 @@ implementation, both contains
 
 All those functions is as simple and stupid as you think.
 
-| Difference      | JS   | WASM   |
-| --------------- | ---- | ------ |
-| Runs const-time | no   | yes    |
-| Benchmark       | ~1ms | ~650us |
+| Difference      | JS     | WASM   |
+| --------------- | ------ | ------ |
+| Runs const-time | no     | yes    |
+| Benchmark       | ~950us | ~560us |
 
 ## Installation
 
@@ -63,8 +63,11 @@ console.log("Shared Secret:", encodeBase64(s));
 
 ## Notes
 
-This implementation should be const-time, but I did not test it so much. So use
-it at your own risk.
+This WASM implementation should be const-time, but I did not test it so much. So
+use it at your own risk.
+
+By the way, WASM implementation requires SIMD feature to be enabled, this should
+not be a big problem if you are not come from last century.
 
 ## Benchmark
 
@@ -76,16 +79,16 @@ file:///home/swwind/Repo/work/deno-x25519/mod_bench.ts
 
 benchmark   time/iter (avg)        iter/s      (min … max)           p75      p99     p995
 ----------- ----------------------------- --------------------- --------------------------
-js pubkey          916.9 µs         1,091 (847.4 µs …   1.2 ms) 978.6 µs   1.1 ms   1.1 ms
-js ecdh            944.4 µs         1,059 (882.4 µs …   1.1 ms)   1.0 ms   1.1 ms   1.1 ms
+js pubkey          901.4 µs         1,109 (845.4 µs …   1.2 ms) 880.2 µs   1.1 ms   1.1 ms
+js ecdh            949.9 µs         1,053 (895.2 µs …   2.0 ms) 937.3 µs   1.2 ms   1.3 ms
 
 
 file:///home/swwind/Repo/work/deno-x25519/wasm_bench.ts
 
 benchmark     time/iter (avg)        iter/s      (min … max)           p75      p99     p995
 ------------- ----------------------------- --------------------- --------------------------
-wasm pubkey          646.7 µs         1,546 (629.8 µs … 742.1 µs) 647.2 µs 735.0 µs 739.6 µs
-wasm ecdh            644.6 µs         1,551 (630.8 µs … 831.8 µs) 646.7 µs 710.2 µs 740.1 µs
+wasm pubkey          561.2 µs         1,782 (544.8 µs … 644.6 µs) 565.9 µs 580.0 µs 591.4 µs
+wasm ecdh            560.9 µs         1,783 (542.5 µs … 736.8 µs) 566.8 µs 578.9 µs 585.5 µs
 ```
 
 ## License
