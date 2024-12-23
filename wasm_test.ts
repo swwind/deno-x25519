@@ -1,5 +1,5 @@
 import { assertEquals } from "@std/assert";
-import { ecdh, genkey, pubkey } from "./mod.ts";
+import { ecdh, genkey, pubkey } from "./wasm.ts";
 import { decodeBase64, encodeBase64 } from "@std/encoding";
 
 function checkKeyPair(sk: string, pk: string) {

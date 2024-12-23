@@ -12,7 +12,7 @@ pub fn pubkey(seckey: &[u8]) -> Box<[u8]> {
 }
 
 #[wasm_bindgen]
-pub fn x25519(seckey: &[u8], pubkey: &[u8]) -> Box<[u8]> {
+pub fn ecdh(seckey: &[u8], pubkey: &[u8]) -> Box<[u8]> {
     let seckey = seckey.try_into().unwrap();
     let pubkey = pubkey.try_into().unwrap();
     let shared = X25519::ecdh(&seckey, &pubkey);

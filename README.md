@@ -1,14 +1,22 @@
 # x25519 for deno
 
-A simple library for x25519 key exchange using WebCrypto and WebAssembly.
+A simple library for x25519 key exchange algorithm.
 
 ## Features
 
-- Generate cryptographically secure random secret keys.
-- Derive public keys from secret keys.
-- Compute shared secrets for secure communication.
+This library provides both JS implementation (with BigInt) and WASM
+implementation, both contains
 
-As simple and stupid as you think.
+- `genkey`: Generate cryptographically secure random secret keys.
+- `pubkey`: Derive public keys from secret keys.
+- `ecdh`: Compute shared secrets for secure communication.
+
+All those functions is as simple and stupid as you think.
+
+| Difference      | JS   | WASM   |
+| --------------- | ---- | ------ |
+| Runs const-time | no   | yes    |
+| Benchmark       | ~1ms | ~650us |
 
 ## Installation
 
@@ -19,6 +27,9 @@ deno add jsr:@swwind/x25519
 ```
 
 ## Usage
+
+- import from `@swwind/x25519` if you want the JS version.
+- import from `@swwind/x25519/wasm` if you want the WASM version.
 
 ### Generate a Secret Key
 
@@ -43,16 +54,39 @@ console.log("Public Key:", encodeBase64(pk));
 ### Compute a Shared Secret
 
 ```javascript
-import { x25519 } from "@swwind/x25519";
+import { ecdh } from "@swwind/x25519";
 
-const s = x25519(sk, pk);
+const s = ecdh(sk, pk);
 console.log("Shared Secret:", encodeBase64(s));
 // eiSMV9fI1f/pTdB79E318wddCQhifZF2TAIlla0Cv0o=
 ```
 
 ## Notes
 
-This implementation should be const-time, but I did not test it so much. So use it at your own risk.
+This implementation should be const-time, but I did not test it so much. So use
+it at your own risk.
+
+## Benchmark
+
+```
+    CPU | AMD Ryzen 7 4800H with Radeon Graphics
+Runtime | Deno 2.0.5 (x86_64-unknown-linux-gnu)
+
+file:///home/swwind/Repo/work/deno-x25519/mod_bench.ts
+
+benchmark   time/iter (avg)        iter/s      (min … max)           p75      p99     p995
+----------- ----------------------------- --------------------- --------------------------
+js pubkey          916.9 µs         1,091 (847.4 µs …   1.2 ms) 978.6 µs   1.1 ms   1.1 ms
+js ecdh            944.4 µs         1,059 (882.4 µs …   1.1 ms)   1.0 ms   1.1 ms   1.1 ms
+
+
+file:///home/swwind/Repo/work/deno-x25519/wasm_bench.ts
+
+benchmark     time/iter (avg)        iter/s      (min … max)           p75      p99     p995
+------------- ----------------------------- --------------------- --------------------------
+wasm pubkey          646.7 µs         1,546 (629.8 µs … 742.1 µs) 647.2 µs 735.0 µs 739.6 µs
+wasm ecdh            644.6 µs         1,551 (630.8 µs … 831.8 µs) 646.7 µs 710.2 µs 740.1 µs
+```
 
 ## License
 
