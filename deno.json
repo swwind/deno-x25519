@@ -1,6 +1,6 @@
 {
   "name": "@swwind/x25519",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "license": "MIT",
   "tasks": {
     "build": "wasm-pack build --target deno"

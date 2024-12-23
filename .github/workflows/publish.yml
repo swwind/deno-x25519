@@ -28,6 +28,7 @@ jobs:
         run: |
           cargo test
           deno test -A
+          deno bench -A
 
       - name: Publish package
         run: deno publish
