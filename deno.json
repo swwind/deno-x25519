@@ -1,6 +1,6 @@
 {
   "name": "@swwind/x25519",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "license": "MIT",
   "tasks": {
     "build": "env RUSTFLAGS=\"-C target-feature=+simd128\" wasm-pack build --target deno"
