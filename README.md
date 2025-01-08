@@ -72,23 +72,27 @@ not be a big problem if you are not come from last century.
 ## Benchmark
 
 ```
-    CPU | AMD Ryzen 7 4800H with Radeon Graphics
-Runtime | Deno 2.0.5 (x86_64-unknown-linux-gnu)
+    CPU | Intel(R) Core(TM) i7-14700F
+Runtime | Deno 2.1.4 (x86_64-unknown-linux-gnu)
 
-file:///home/swwind/Repo/work/deno-x25519/mod_bench.ts
+file:///home/swwind/Work/deno-x25519/mod_bench.ts
 
-benchmark   time/iter (avg)        iter/s      (min … max)           p75      p99     p995
------------ ----------------------------- --------------------- --------------------------
-js pubkey          901.4 µs         1,109 (845.4 µs …   1.2 ms) 880.2 µs   1.1 ms   1.1 ms
-js ecdh            949.9 µs         1,053 (895.2 µs …   2.0 ms) 937.3 µs   1.2 ms   1.3 ms
+benchmark          time/iter (avg)        iter/s      (min … max)           p75      p99     p995
+------------------ ----------------------------- --------------------- --------------------------
+js pubkey                 599.0 µs         1,669 (582.0 µs … 680.3 µs) 596.8 µs 642.0 µs 655.6 µs
+js ecdh                   620.8 µs         1,611 (603.8 µs … 701.0 µs) 624.0 µs 676.3 µs 681.8 µs
+js pubkey random          602.2 µs         1,661 (579.8 µs … 905.6 µs) 600.2 µs 794.8 µs 804.4 µs
+js ecdh random            621.2 µs         1,610 (601.3 µs …   1.2 ms) 620.9 µs 676.4 µs 688.3 µs
 
 
-file:///home/swwind/Repo/work/deno-x25519/wasm_bench.ts
+file:///home/swwind/Work/deno-x25519/wasm_bench.ts
 
-benchmark     time/iter (avg)        iter/s      (min … max)           p75      p99     p995
-------------- ----------------------------- --------------------- --------------------------
-wasm pubkey          561.2 µs         1,782 (544.8 µs … 644.6 µs) 565.9 µs 580.0 µs 591.4 µs
-wasm ecdh            560.9 µs         1,783 (542.5 µs … 736.8 µs) 566.8 µs 578.9 µs 585.5 µs
+benchmark            time/iter (avg)        iter/s      (min … max)           p75      p99     p995
+-------------------- ----------------------------- --------------------- --------------------------
+wasm pubkey                 468.7 µs         2,133 (463.7 µs … 793.2 µs) 469.4 µs 474.5 µs 480.2 µs
+wasm ecdh                   469.7 µs         2,129 (465.5 µs … 674.5 µs) 470.4 µs 474.7 µs 475.3 µs
+wasm pubkey random          469.4 µs         2,130 (465.1 µs … 490.9 µs) 470.5 µs 474.9 µs 475.9 µs
+wasm ecdh random            470.1 µs         2,127 (466.7 µs … 506.8 µs) 471.2 µs 476.8 µs 481.9 µs
 ```
 
 ## License
