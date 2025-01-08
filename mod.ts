@@ -1,11 +1,11 @@
+import { clamp } from "./utils.ts";
+
 /**
  * Generate a crypto-safe random SecretKey.
  */
 export function genkey(): Uint8Array {
   const seckey = crypto.getRandomValues(new Uint8Array(32));
-  seckey[0] &= 0xf8;
-  seckey[31] = (seckey[31] & 0x7f) | 0x40;
-  return seckey;
+  return clamp(seckey);
 }
 
 const p = (1n << 255n) - 19n;
@@ -75,12 +75,12 @@ function pack(buffer: Uint8Array) {
  * Derive PublicKey from SecretKey. (js)
  */
 export function pubkey(sk: Uint8Array): Uint8Array {
-  return unpack(scalarmult(sk, 9n));
+  return unpack(scalarmult(clamp(sk), 9n));
 }
 
 /**
  * Compute SharedSecret with given SecretKey and PublicKey. (js)
  */
 export function ecdh(sk: Uint8Array, pk: Uint8Array): Uint8Array {
-  return unpack(scalarmult(sk, pack(pk)));
+  return unpack(scalarmult(clamp(sk), pack(pk)));
 }
