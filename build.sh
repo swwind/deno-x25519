@@ -2,4 +2,5 @@
 wasm-pack build --target deno
 
 # fix imports for nodejs
-sed -i '/wasmCode/{N;N;N;N;N;N;N;N;N;N;N;s/.*/const wasmCode = await (await fetch(wasm_url)).arrayBuffer();/}' pkg/x25519.js
+sed -i '1s!^!import { readFile } from "node:fs/promises";!' pkg/x25519.js
+sed -i 's/await Deno.readFile/await readFile/' pkg/x25519.js
